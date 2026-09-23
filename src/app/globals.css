@@ -1,26 +1,365 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ⬇ Every theme color lives in one file. Edit src/theme.css to re-theme
+   the site (light is default; `.dark` holds the night palette). */
+@import "../theme.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ==========================================================================
+   SUPER LUCK — Design tokens wiring
+   Structure only: utility → variable mappings, typography, radius, motion.
+   Color VALUES are all in src/theme.css.
+   ========================================================================== */
 
 @theme inline {
+  /* ---- shadcn surface tokens ---------------------------------------- */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* ---- brand palette ------------------------------------------------ */
+  /* night ramp — phone bezels / dark chips (works in both themes) */
+  --color-night: var(--night-950);
+  --color-night-900: var(--night-900);
+  --color-night-800: var(--night-800);
+  --color-night-700: var(--night-700);
+  --color-night-600: var(--night-600);
+
+  /* gold — `--gold` is theme-aware (deep ink on light, bright on dark) */
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-hover);
+  --color-gold-soft: var(--gold-soft);
+  --color-gold-deep: var(--gold-deep);
+
+  /* legacy name: resolves to the current text color in either theme */
+  --color-parchment: var(--foreground);
+
+  --color-energy-pray: var(--energy-pray);
+  --color-energy-bless: var(--energy-bless);
+  --color-energy-manifest: var(--energy-manifest);
+  --color-energy-protect: var(--energy-protect);
+
+  /* ---- typography --------------------------------------------------- */
+  --font-sans: var(--font-outfit);
+  --font-heading: var(--font-cinzel);
+  --font-display: var(--font-cinzel);
+  --font-script: var(--font-script-hand);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* ---- radii -------------------------------------------------------- */
+  --radius: 1rem;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* ---- motion ------------------------------------------------------- */
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 12s ease-in-out infinite;
+  --animate-drift: drift 20s ease-in-out infinite;
+  --animate-twinkle: twinkle 4.5s ease-in-out infinite;
+  --animate-shimmer: shimmer 7s linear infinite;
+  --animate-glow: glow 6s ease-in-out infinite;
+  --animate-spin-slow: spin 30s linear infinite;
+  --animate-spin-slower: spin 60s linear infinite;
+  --animate-rise: rise 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-word-rise: word-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-pulse-ring: pulse-ring 3.4s ease-out infinite;
+  --animate-sheen: sheen 8s ease-in-out infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-14px);
+    }
+  }
+
+  @keyframes drift {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    33% {
+      transform: translate3d(2%, -3%, 0) scale(1.05);
+    }
+    66% {
+      transform: translate3d(-2%, 2%, 0) scale(0.97);
+    }
+  }
+
+  @keyframes twinkle {
+    0%,
+    100% {
+      opacity: 0.25;
+    }
+    50% {
+      opacity: 0.85;
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 50%;
+    }
+    100% {
+      background-position: 200% 50%;
+    }
+  }
+
+  @keyframes sheen {
+    0%,
+    60%,
+    100% {
+      transform: translateX(-120%) rotate(12deg);
+    }
+    30% {
+      transform: translateX(220%) rotate(12deg);
+    }
+  }
+
+  @keyframes glow {
+    0%,
+    100% {
+      opacity: 0.55;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(0.85);
+      opacity: 0.55;
+    }
+    70% {
+      transform: scale(1.25);
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes word-rise {
+    from {
+      opacity: 0;
+      transform: translateY(0.6em) rotate(2deg);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+    /* Anchored sections keep clear of the sticky header through per-element
+       `scroll-mt-*` values. A global `scroll-padding-top` would stack on top
+       of those and overshoot every anchor jump. */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  /* horizontal scrollers that should not show a scrollbar */
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* --- marquee --------------------------------------------------------
+     Two duplicated copies of the list; the track slides -50% so the seam
+     is invisible. Duration is set per instance through --marquee-duration. */
+  .marquee {
+    display: flex;
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    flex-shrink: 0;
+    animation: marquee var(--marquee-duration, 44s) linear infinite;
+  }
+
+  .marquee[data-direction="reverse"] .marquee-track {
+    animation-direction: reverse;
+  }
+
+  /* --- scroll reveal -------------------------------------------------
+     Visible by default. `data-reveal="pending"` is written by the Reveal
+     component only when it knows it can observe the element, so text can
+     never be stranded invisible by a missing or broken observer. */
+  .reveal {
+    transition:
+      opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.95s ease;
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal[data-reveal="pending"] {
+    opacity: 0;
+    will-change: opacity, transform;
+  }
+
+  .reveal[data-reveal="pending"][data-anim="up"] {
+    transform: translateY(30px);
+  }
+
+  .reveal[data-reveal="pending"][data-anim="down"] {
+    transform: translateY(-24px);
+  }
+
+  /* `left`/`right` intentionally animate vertically: a horizontal offset on a
+     full-width card would let the page pan sideways on small screens. The
+     slight scale keeps the sideways feel without the overflow. */
+  .reveal[data-reveal="pending"][data-anim="left"],
+  .reveal[data-reveal="pending"][data-anim="right"] {
+    transform: translateY(26px) scale(0.985);
+  }
+
+  .reveal[data-reveal="pending"][data-anim="zoom"] {
+    transform: scale(0.93);
+  }
+
+  .reveal[data-reveal="pending"][data-anim="blur"] {
+    filter: blur(12px);
+    transform: translateY(18px);
+  }
+
+  .reveal[data-reveal="true"] {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  /* Words animate themselves with a CSS keyframe, so the headline rises on
+     every load even before — or without — any JavaScript. */
+  .word-rise {
+    display: inline-block;
+    animation: var(--animate-word-rise);
+    animation-delay: var(--word-delay, 0ms);
+  }
+}
+
+@utility text-balance-pretty {
+  text-wrap: pretty;
+}
+
+/* Respect the user's motion preference across every decorative animation. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  /* The wall of wishes is content rather than decoration: keep it drifting,
+     just more slowly than usual. */
+  .marquee-track {
+    animation-duration: calc(var(--marquee-duration, 44s) * 1.8) !important;
+    animation-iteration-count: infinite !important;
+  }
 }

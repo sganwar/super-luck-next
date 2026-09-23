@@ -1,0 +1,352 @@
+/* ==========================================================================
+   SUPER LUCK — THEME (single source of truth)
+   --------------------------------------------------------------------------
+   Change brand or surface colors HERE and the whole site follows.
+   The site ships in LIGHT mode (:root below). The old cosmic-night palette
+   is kept in `.dark`, so adding class="dark" to <html> flips the entire
+   site back — every token lives in this one file.
+
+   Layout of this file:
+     1. Shared palette      — ramps that mean the same thing in both themes
+     2. Light theme (:root) — the default look
+     3. Dark theme (.dark)  — night-sky look
+     4. Base chrome         — selection, focus ring, scrollbar
+     5. Color components    — .glass, .card-lux, .eyebrow, … (token-driven)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. SHARED PALETTE — the brand "metal" and the night ramp (device bezels).
+   Bright golds are used for CTA gradient buttons and glows in BOTH themes.
+   -------------------------------------------------------------------------- */
+:root {
+  /* lantern gold ramp (bright end used by gradients/glows) */
+  --gold-200: #fff3cf;
+  --gold-300: #ffe391;
+  --gold-400: #f8c94f;
+  --gold-500: #eeb027;
+  --gold-600: #c1871a;
+  /* deep end — readable gold on light surfaces */
+  --gold-700: #7a5208;
+  --gold-800: #6d4804;
+
+  /* night ramp — reserved for phone bezels / dark chips in both themes */
+  --night-950: #04060f;
+  --night-900: #070b1c;
+  --night-800: #0c1230;
+  --night-700: #141c46;
+  --night-600: #1e2a5f;
+
+  /* paper */
+  --parchment: #f7f2e4;
+
+  color-scheme: light;
+}
+
+/* --------------------------------------------------------------------------
+   2. LIGHT THEME (default) — warm ivory paper, ink text, deep-gold accent.
+   -------------------------------------------------------------------------- */
+:root {
+  /* gold as UI ink: `text-gold`, `border-gold`, `bg-gold` resolve to this */
+  --gold: #8a5c0a;         /* ~5.3:1 on --background */
+  --gold-hover: #6d4804;   /* hover/pressed accent */
+  --gold-soft: #a3700f;
+  --gold-deep: #6d4804;
+
+  /* accent type colors */
+  --script-color: var(--gold);      /* calligraphic accent lines */
+  --eyebrow-color: var(--gold-700); /* tiny uppercase labels (~6.4:1) */
+
+  /* energy accents — deepened so they stay legible on ivory */
+  --energy-pray: #1d6fd8;
+  --energy-bless: #d41946;
+  --energy-manifest: #7c3aed;
+  --energy-protect: #15803d;
+
+  /* shadcn surfaces */
+  --background: #faf7f0;
+  --foreground: #262019;
+  --card: #fffdf8;
+  --card-foreground: var(--foreground);
+  --popover: #fffdf8;
+  --popover-foreground: var(--foreground);
+  --primary: var(--gold);
+  --primary-foreground: #fffbf2;
+  --secondary: rgba(38, 32, 25, 0.06);
+  --secondary-foreground: var(--foreground);
+  --muted: rgba(38, 32, 25, 0.055);
+  --muted-foreground: #6b6455;
+  --accent: rgba(248, 201, 79, 0.22);
+  --accent-foreground: var(--gold-700);
+  --destructive: #d41946;
+  --border: rgba(38, 32, 25, 0.1);
+  --input: rgba(38, 32, 25, 0.16);
+  --ring: rgba(138, 92, 10, 0.55);
+  --chart-1: var(--gold);
+  --chart-2: var(--energy-pray);
+  --chart-3: var(--energy-manifest);
+  --chart-4: var(--energy-protect);
+  --chart-5: var(--energy-bless);
+  --sidebar: #fffdf8;
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--gold);
+  --sidebar-primary-foreground: #fffbf2;
+  --sidebar-accent: rgba(38, 32, 25, 0.06);
+  --sidebar-accent-foreground: var(--foreground);
+  --sidebar-border: rgba(38, 32, 25, 0.1);
+  --sidebar-ring: rgba(138, 92, 10, 0.55);
+
+  /* morning-sky backdrop (CosmicBackground reads these) */
+  --sky-top: #fdfcf8;
+  --sky-mid: #faf7ef;
+  --sky-bottom: #f7f2e6;
+  --star-dust: rgba(184, 140, 40, 0.85);
+  --orb-gold: rgba(238, 176, 39, 0.2);
+  --orb-pray: rgba(29, 111, 216, 0.1);
+  --orb-manifest: rgba(124, 58, 237, 0.1);
+  --orb-protect: rgba(21, 128, 61, 0.1);
+  --horizon-glow: rgba(238, 176, 39, 0.11);
+  --sky-edge: rgba(228, 214, 182, 0.4);
+
+  /* chrome */
+  --scroll-track: #f2ecdd;
+  --scroll-thumb-a: rgba(154, 107, 18, 0.6);
+  --scroll-thumb-b: rgba(109, 72, 4, 0.6);
+
+  /* --- token-driven component surfaces (see §5) --- */
+  --glass-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.58));
+  --glass-border: rgba(38, 32, 25, 0.08);
+
+  --card-lux-bg:
+    radial-gradient(120% 140% at 50% -20%, rgba(248, 201, 79, 0.13), transparent 55%),
+    linear-gradient(180deg, #fffefb 0%, #faf6ec 100%);
+  --card-lux-border: rgba(38, 32, 25, 0.09);
+  --card-lux-border-hover: rgba(154, 107, 18, 0.45);
+--card-lux-inset: inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+--card-lux-glow: 0 22px 40px rgba(90, 70, 20, 0.32);
+--card-lux-inset-hover: inset 0 1px 0 0 rgba(255, 255, 255, 0.95);
+--card-lux-glow-hover: 0 28px 50px rgba(154, 107, 18, 0.42);
+
+  --hairline-mid: rgba(154, 107, 18, 0.55);
+  --orbit-ring: rgba(154, 107, 18, 0.35);
+
+  /* shimmer gradient used by `.text-gold` (deep end for light paper) */
+  --text-gold-image: linear-gradient(
+    100deg,
+    var(--gold-800) 0%,
+    var(--gold-600) 24%,
+    var(--gold-700) 46%,
+    var(--gold-600) 68%,
+    var(--gold-800) 100%
+  );
+
+  /* announcement strip — follows the energy/gold accents automatically */
+  --topbar-gradient: linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--energy-pray) 15%, transparent),
+    color-mix(in oklab, var(--gold-500) 24%, transparent),
+    color-mix(in oklab, var(--energy-manifest) 15%, transparent)
+  );
+}
+
+/* --------------------------------------------------------------------------
+   3. DARK THEME — the original cosmic-night palette (add .dark to <html>).
+   -------------------------------------------------------------------------- */
+.dark {
+  color-scheme: dark;
+
+  --gold: var(--gold-400);
+  --gold-hover: var(--gold-200);
+  --gold-soft: var(--gold-300);
+  --gold-deep: var(--gold-600);
+
+  --script-color: var(--gold-300);
+  --eyebrow-color: var(--gold-300);
+
+  --energy-pray: #4ea8ff;
+  --energy-bless: #ff5674;
+  --energy-manifest: #b667ff;
+  --energy-protect: #46dd85;
+
+  --background: var(--night-950);
+  --foreground: var(--parchment);
+  --card: rgba(255, 255, 255, 0.035);
+  --card-foreground: var(--parchment);
+  --popover: #0b1026;
+  --popover-foreground: var(--parchment);
+  --primary: var(--gold-400);
+  --primary-foreground: #251a02;
+  --secondary: rgba(255, 255, 255, 0.07);
+  --secondary-foreground: var(--parchment);
+  --muted: rgba(255, 255, 255, 0.055);
+  --muted-foreground: #a3a9c7;
+  --accent: rgba(248, 201, 79, 0.14);
+  --accent-foreground: var(--gold-300);
+  --destructive: #ff5674;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.12);
+  --ring: rgba(248, 201, 79, 0.6);
+  --sidebar: var(--night-900);
+  --sidebar-foreground: var(--parchment);
+  --sidebar-primary: var(--gold-400);
+  --sidebar-primary-foreground: #251a02;
+  --sidebar-accent: rgba(255, 255, 255, 0.06);
+  --sidebar-accent-foreground: var(--parchment);
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: rgba(248, 201, 79, 0.6);
+
+  --sky-top: #04060f;
+  --sky-mid: #070b1c;
+  --sky-bottom: #04060f;
+  --star-dust: rgba(255, 255, 255, 0.9);
+  --orb-gold: rgba(248, 201, 79, 0.16);
+  --orb-pray: rgba(78, 168, 255, 0.16);
+  --orb-manifest: rgba(182, 103, 255, 0.16);
+  --orb-protect: rgba(70, 221, 133, 0.12);
+  --horizon-glow: rgba(248, 201, 79, 0.07);
+  --sky-edge: rgba(2, 3, 8, 0.85);
+
+  --scroll-track: #04060f;
+  --scroll-thumb-a: rgba(248, 201, 79, 0.5);
+  --scroll-thumb-b: rgba(193, 135, 26, 0.5);
+
+  --glass-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.02));
+  --glass-border: rgba(255, 255, 255, 0.09);
+
+  --card-lux-bg:
+    radial-gradient(120% 140% at 50% -20%, rgba(248, 201, 79, 0.09), transparent 55%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015)),
+    #070c1c;
+  --card-lux-border: rgba(255, 255, 255, 0.09);
+  --card-lux-border-hover: rgba(248, 201, 79, 0.35);
+--card-lux-inset: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+--card-lux-glow: 0 22px 46px rgba(0, 0, 0, 0.75);
+--card-lux-inset-hover: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+--card-lux-glow-hover: 0 28px 60px rgba(248, 201, 79, 0.4);
+
+  --hairline-mid: rgba(248, 201, 79, 0.55);
+  --orbit-ring: rgba(248, 201, 79, 0.22);
+
+  --text-gold-image: linear-gradient(
+    100deg,
+    var(--gold-600) 0%,
+    var(--gold-200) 24%,
+    var(--gold-400) 46%,
+    var(--gold-200) 68%,
+    var(--gold-600) 100%
+  );
+}
+
+/* --------------------------------------------------------------------------
+   4. BASE CHROME — theme colors for selection, focus ring and scrollbar.
+   -------------------------------------------------------------------------- */
+@layer base {
+  ::selection {
+    background: rgba(248, 201, 79, 0.45);
+    color: var(--foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scroll-thumb-a) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--scroll-track);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--scroll-thumb-a), var(--scroll-thumb-b));
+    border-radius: 999px;
+    border: 2px solid var(--scroll-track);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5. COLOR COMPONENTS — styling driven entirely by the tokens above.
+   -------------------------------------------------------------------------- */
+@layer components {
+  /* frosted surface (stats panel, floating wish chips) */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid var(--glass-border);
+  }
+
+  /* the signature feature card */
+.card-lux {
+  position: relative;
+  isolation: isolate;
+  border-radius: var(--radius-xl);
+  background: var(--card-lux-bg);
+  border: 1px solid var(--card-lux-border);
+  box-shadow: var(--card-lux-shadow);
+  transition:
+    border-color 0.45s ease,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s ease;
+}
+
+@media (hover: hover) {
+  .card-lux:hover {
+    border-color: var(--card-lux-border-hover);
+    box-shadow: var(--card-lux-shadow-hover);
+  }
+}
+
+  /* thin luminous hairline that fades at both ends */
+  .hairline {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--hairline-mid), transparent);
+  }
+
+  /* --- type -------------------------------------------------------- */
+  .text-gold {
+    background-image: var(--text-gold-image);
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: var(--animate-shimmer);
+  }
+
+  .text-script {
+    @apply font-script;
+    color: var(--script-color);
+    letter-spacing: 0.01em;
+  }
+
+  .eyebrow {
+    @apply font-sans text-[0.7rem] font-medium uppercase;
+    letter-spacing: 0.34em;
+    color: var(--eyebrow-color);
+  }
+
+  /* --- decorations ------------------------------------------------- */
+  .energy-glow {
+    background: radial-gradient(
+      circle at center,
+      color-mix(in oklab, var(--glow-color, var(--gold-400)) 42%, transparent) 0%,
+      transparent 68%
+    );
+  }
+
+  .ring-orbit {
+    border: 1px solid var(--orbit-ring);
+    border-radius: 999px;
+  }
+
+  /* announcement strip */
+  .topbar-strip {
+    background: var(--topbar-gradient);
+  }
+}
