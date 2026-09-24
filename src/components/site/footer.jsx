@@ -45,7 +45,7 @@ export default function Footer() {
         className="pointer-events-none absolute left-1/2 top-0 -z-10 size-[30rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/[0.07] blur-3xl"
       />
 
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-14 lg:py-16">
+      <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 sm:py-14 lg:py-16">
         {/* Main footer content */}
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
           {/* Brand column */}
@@ -168,31 +168,27 @@ export default function Footer() {
 
 {/* Bottom row */}
 <div className="mt-12 border-t border-border pt-6">
-  <div className="flex flex-col gap-3">
+  <div className="relative flex flex-col gap-3 sm:min-h-5 sm:flex-row sm:items-center">
     {/* Copyright */}
     <p className="text-center text-xs text-muted-foreground sm:text-left">
       © {year} {siteConfig.name}. All rights reserved.
     </p>
 
-    {/* Developer + version */}
-    <div className="flex items-center justify-between text-xs text-muted-foreground sm:ml-auto sm:mt-0">
-      <a
-        href={siteConfig.developer.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="transition-colors duration-200 hover:text-gold"
-      >
-        {siteConfig.developer.creditPrefix}{" "}
-        {siteConfig.developer.name}
-      </a>
+    {/* Developer credit */}
+    <a
+      href={siteConfig.developer.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-center text-xs text-muted-foreground transition-colors duration-200 hover:text-gold sm:absolute sm:left-1/2 sm:-translate-x-1/2"
+    >
+      {siteConfig.developer.creditPrefix}{" "}
+      {siteConfig.developer.name}
+    </a>
 
-      <div className="flex items-center gap-2">
-        <span>v{packageInfo.version}</span>
-        <span aria-hidden="true" className="text-border">
-          ·
-        </span>
-      </div>
-    </div>
+    {/* Version */}
+    <span className="text-center text-xs text-muted-foreground sm:ml-auto">
+      v{packageInfo.version}
+    </span>
   </div>
 </div>
       </div>
