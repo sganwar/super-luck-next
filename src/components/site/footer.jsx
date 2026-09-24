@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import packageInfo from "@/../package.json";
 
 import siteConfig from "@/data/site";
@@ -143,16 +144,18 @@ export default function Footer() {
                   </a>
                 </li>
 
-                <li>
-                  <a
-                    href={`tel:${siteConfig.contact.phoneHref}`}
-                    className="group flex items-start gap-2.5 text-sm text-muted-foreground transition-colors duration-200 hover:text-gold"
-                  >
-                    <Phone className="mt-0.5 size-3.5 shrink-0 text-gold/60 transition-colors group-hover:text-gold" />
+<li>
+  <a
+    href={`https://wa.me/${siteConfig.contact.phoneHref}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="group flex items-start gap-2.5 text-sm text-muted-foreground transition-colors duration-200 hover:text-gold"
+  >
+    <FaWhatsapp className="mt-0.5 size-3.5 shrink-0 text-gold/60 transition-colors group-hover:text-gold" />
 
-                    <span>{siteConfig.contact.phone}</span>
-                  </a>
-                </li>
+    <span>{siteConfig.contact.phone}</span>
+  </a>
+</li>
 
                 <li>
                   <div className="flex items-start gap-2.5 text-sm leading-relaxed text-muted-foreground">

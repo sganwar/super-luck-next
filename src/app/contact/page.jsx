@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 
 import siteConfig from "@/data/site";
 import { buildBreadcrumbSchema } from "@/data/schema";
@@ -31,11 +32,11 @@ const contactItems = [
     Icon: Mail,
   },
   {
-    id: "phone",
-    label: "Phone",
+    id: "whatsapp",
+    label: "Whatsapp",
     value: siteConfig.contact.phone,
-    href: `tel:${siteConfig.contact.phoneHref}`,
-    Icon: Phone,
+    href: `https://wa.me/${siteConfig.contact.phoneHref}`,
+    Icon: FaWhatsapp,
   },
   {
     id: "location",
