@@ -77,7 +77,8 @@ export default function DownloadPage() {
 
           {/* Store buttons immediately visible */}
           <div className="mt-8 flex justify-center">
-            <StoreButtons />
+            <StoreButtons size="sm" className="flex md:hidden"/>
+            <StoreButtons size="lg" className="hidden md:flex"/>
           </div>
 
           <p className="mt-4 text-xs text-muted-foreground">

@@ -121,18 +121,18 @@ export default function ContactPage() {
                               <item.Icon className="size-4" />
                             </span>
 
-                            <span className="min-w-0">
+                            <span className="min-w-0 flex-1">
                               <span className="block text-xs text-muted-foreground">
                                 {item.label}
                               </span>
 
-                              <span className="mt-1 block truncate text-sm font-medium text-parchment">
+                              <span className="mt-1 block break-words text-sm font-medium leading-relaxed text-parchment">
                                 {item.value}
                               </span>
                             </span>
 
                             {item.href && (
-                              <ArrowUpRight className="ml-auto size-4 shrink-0 text-muted-foreground transition-all duration-300 group-hover/item:-translate-y-0.5 group-hover/item:translate-x-0.5 group-hover/item:text-gold" />
+                              <ArrowUpRight className="ml-auto size-4 shrink-0 self-center text-muted-foreground transition-all duration-300 group-hover/item:-translate-y-0.5 group-hover/item:translate-x-0.5 group-hover/item:text-gold" />
                             )}
                           </>
                         );
@@ -141,7 +141,7 @@ export default function ContactPage() {
                           return (
                             <div
                               key={item.id}
-                              className="flex items-center gap-4 rounded-2xl border border-border bg-background/70 p-4"
+                              className="flex min-w-0 items-start gap-4 rounded-2xl border border-border bg-background/70 p-4"
                             >
                               {content}
                             </div>
@@ -152,7 +152,7 @@ export default function ContactPage() {
                           <a
                             key={item.id}
                             href={item.href}
-                            className="group/item flex items-center gap-4 rounded-2xl border border-border bg-background/70 p-4 transition-all duration-300 hover:border-gold/40 hover:bg-gold/[0.05]"
+                            className="group/item flex min-w-0 items-start gap-4 rounded-2xl border border-border bg-background/70 p-4 transition-all duration-300 hover:border-gold/40 hover:bg-gold/[0.05]"
                           >
                             {content}
                           </a>
@@ -167,10 +167,22 @@ export default function ContactPage() {
 
                   {/* Illustration */}
                   <div className="relative min-h-[360px] overflow-hidden border-t border-border lg:min-h-[500px] lg:border-l lg:border-t-0">
-                    {/* Illustration glow */}
+                    {/* Central glow */}
                     <div
                       aria-hidden="true"
-                      className="absolute left-1/2 top-1/2 size-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/[0.08] blur-3xl"
+                      className="pointer-events-none absolute left-1/2 top-1/2 size-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/[0.08] blur-3xl"
+                    />
+
+                    {/* Left smoky glow */}
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute left-0 top-1/2 size-48 -translate-x-1/3 -translate-y-1/2 rounded-full bg-gold/[0.06] blur-3xl"
+                    />
+
+                    {/* Right smoky glow */}
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute right-0 top-1/2 size-48 translate-x-1/3 -translate-y-1/2 rounded-full bg-gold/[0.06] blur-3xl"
                     />
 
                     {/* Decorative orbit */}
@@ -210,26 +222,36 @@ export default function ContactPage() {
                     />
 
                     {/* Floating illustration */}
-                    <div className="absolute inset-0 flex items-center justify-center p-8 sm:p-12">
-                      <div className="relative animate-[contact-float_6s_ease-in-out_infinite]">
+                    <div className="absolute inset-0 flex items-center justify-center overflow-hidden px-4 py-8 sm:px-8 sm:py-12">
+                      <div className="relative flex w-full items-center justify-center animate-[contact-float_6s_ease-in-out_infinite]">
                         <Image
                           src={contactVector}
                           alt="Contact Super Luck support"
                           width={500}
                           height={500}
                           priority
-                          className="relative z-10 max-h-[330px] w-auto object-contain drop-shadow-[0_25px_50px_rgba(90,70,20,0.3)] sm:max-h-[380px]"
+                          className="
+                            relative z-10
+                            h-auto
+                            w-[92%]
+                            max-w-[360px]
+                            max-h-[280px]
+                            object-contain
+                            drop-shadow-[0_25px_50px_rgba(90,70,20,0.3)]
+                            sm:max-h-[380px]
+                            sm:w-auto
+                          "
                         />
 
                         {/* Small orbiting dots */}
                         <span
                           aria-hidden="true"
-                          className="absolute left-0 top-1/3 size-2 rounded-full bg-gold/60 shadow-[0_0_15px_rgba(248,201,79,0.8)]"
+                          className="absolute left-[4%] top-1/3 size-2 rounded-full bg-gold/60 shadow-[0_0_15px_rgba(248,201,79,0.8)] sm:left-[10%]"
                         />
 
                         <span
                           aria-hidden="true"
-                          className="absolute right-1 top-1/4 size-1.5 rounded-full bg-gold/50 shadow-[0_0_12px_rgba(248,201,79,0.8)]"
+                          className="absolute right-[4%] top-1/4 size-1.5 rounded-full bg-gold/50 shadow-[0_0_12px_rgba(248,201,79,0.8)] sm:right-[10%]"
                         />
                       </div>
                     </div>
