@@ -214,7 +214,7 @@ const siteConfig = {
   /* Social proof (numbers from the brand's own creative)                */
   /* ------------------------------------------------------------------ */
   stats: [
-    { value: 1000, suffix: "(1M+)", label: "Prayers & blessings completed" },
+    { value: 1000, suffix: "k(1M+)", label: "Prayers & blessings completed" },
     { value: 4, suffix: "", label: "Energy experiences to send" },
     { value: 10, suffix: "+", label: "Wish categories to create" },
     { value: 24, suffix: "/7", label: "Community support flowing" },
